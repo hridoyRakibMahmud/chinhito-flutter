@@ -6,6 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../features/auth/presentation/sign_in_screen.dart';
 import '../../features/destination_detail/presentation/destination_detail_screen.dart';
+import '../../features/feed/presentation/compose_screen.dart';
 import '../../features/feed/presentation/feed_screen.dart';
 import '../../features/map_explore/presentation/map_explore_screen.dart';
 import '../../features/profile/presentation/profile_screen.dart';
@@ -73,6 +74,11 @@ GoRouter goRouter(Ref ref) {
         parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) =>
             DestinationDetailScreen(slug: state.pathParameters['slug']!),
+      ),
+      GoRoute(
+        path: '/compose',
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) => const ComposeScreen(),
       ),
     ],
   );
