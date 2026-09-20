@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../features/auth/presentation/sign_in_screen.dart';
+import '../../features/destination_detail/presentation/destination_detail_screen.dart';
 import '../../features/map_explore/presentation/map_explore_screen.dart';
 import '../../features/profile/presentation/profile_screen.dart';
 import '../providers/supabase_provider.dart';
@@ -48,6 +49,11 @@ GoRouter goRouter(Ref ref) {
       GoRoute(path: '/', builder: (context, state) => const MapExploreScreen()),
       GoRoute(path: '/sign-in', builder: (context, state) => const SignInScreen()),
       GoRoute(path: '/profile', builder: (context, state) => const ProfileScreen()),
+      GoRoute(
+        path: '/destinations/:slug',
+        builder: (context, state) =>
+            DestinationDetailScreen(slug: state.pathParameters['slug']!),
+      ),
     ],
   );
 }

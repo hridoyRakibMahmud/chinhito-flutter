@@ -82,6 +82,8 @@ flutter:
 
   assets:
     - .env
+    - assets/geo/bd_divisions.geojson
+    - assets/geo/bd_districts.geojson
 
   # To add assets to your application, add an assets section, like this:
   # assets:
