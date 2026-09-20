@@ -20,6 +20,8 @@ class Destination {
     required this.id,
     required this.districtId,
     required this.districtGeojsonId,
+    required this.districtName,
+    required this.divisionName,
     required this.name,
     this.nameBn,
     required this.slug,
@@ -37,6 +39,8 @@ class Destination {
   /// district polygon level's `idProperty` in geo_drilldown, so a point can
   /// be filtered into the right district when the map drills down.
   final String districtGeojsonId;
+  final String districtName;
+  final String divisionName;
 
   final String name;
   final String? nameBn;
@@ -49,10 +53,13 @@ class Destination {
 
   factory Destination.fromMap(Map<String, dynamic> map) {
     final district = map['districts'] as Map<String, dynamic>;
+    final division = district['divisions'] as Map<String, dynamic>;
     return Destination(
       id: map['id'] as String,
       districtId: map['district_id'] as String,
       districtGeojsonId: district['geojson_id'] as String,
+      districtName: district['name'] as String,
+      divisionName: division['name'] as String,
       name: map['name'] as String,
       nameBn: map['name_bn'] as String?,
       slug: map['slug'] as String,

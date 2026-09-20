@@ -3,9 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geo_drilldown/geo_drilldown.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../shared/providers/supabase_provider.dart';
+import '../../../shared/providers/destinations_provider.dart';
 import '../../../shared/theme/app_theme.dart';
-import '../data/map_explore_repository.dart';
 
 const _levels = [
   MapLevelConfig(
@@ -32,19 +31,10 @@ class MapExploreScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isSignedIn = ref.watch(isSignedInProvider);
     final destinationsAsync = ref.watch(publishedDestinationsProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('চিহ্নিত'),
-        actions: [
-          IconButton(
-            icon: Icon(isSignedIn ? Icons.person : Icons.login),
-            onPressed: () => context.push(isSignedIn ? '/profile' : '/sign-in'),
-          ),
-        ],
-      ),
+      appBar: AppBar(title: const Text('চিহ্নিত')),
       body: destinationsAsync.when(
         data: (destinations) => DrillDownMap(
           style: MapStyle(

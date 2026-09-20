@@ -7,7 +7,11 @@ import '../../../shared/theme/app_theme.dart';
 import '../application/auth_controller.dart';
 
 class SignInScreen extends ConsumerWidget {
-  const SignInScreen({super.key});
+  const SignInScreen({super.key, this.reason});
+
+  /// Context-specific copy for why sign-in was requested (e.g. from a
+  /// "mark visited" or "post" action). Falls back to a generic message.
+  final String? reason;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -15,7 +19,7 @@ class SignInScreen extends ConsumerWidget {
     final isLoading = controllerState.isLoading;
 
     ref.listen(isSignedInProvider, (previous, next) {
-      if (next && context.mounted) context.go('/');
+      if (next && context.mounted && context.canPop()) context.pop();
     });
 
     return Scaffold(
@@ -31,7 +35,7 @@ class SignInScreen extends ConsumerWidget {
                 Text('চিহ্নিত', style: Theme.of(context).textTheme.titleLarge),
                 const SizedBox(height: 8),
                 Text(
-                  'Sign in to mark places visited and share your journey.',
+                  reason ?? 'Sign in to mark places visited and share your journey.',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
