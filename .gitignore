@@ -50,3 +50,6 @@ app.*.map.json
 # Riverpod/build_runner generated files
 *.g.dart
 *.freezed.dart
+
+# Claude Code local settings
+.claude/
